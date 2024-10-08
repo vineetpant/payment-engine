@@ -1,4 +1,4 @@
-# payment_engine
+# Payment engine
 
 ## About
 A simple payments engine written in Rust that processes a series of transactions from a CSV, updates client accounts, handles disputes, chargebacks, and outputs the final state of clients' accounts. This project is designed to handle large datasets efficiently by streaming CSV transactions instead of loading the entire dataset into memory at once.
