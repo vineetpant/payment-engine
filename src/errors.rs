@@ -1,9 +1,13 @@
 use std::{error::Error, fmt};
 
+/// Represents the various errors that can occur in the payment engine.
 #[derive(Debug)]
 pub enum PaymentError {
+    /// Indicates invalid cli argument.
     InvalidCliArgument(String),
+    /// Indicates error in csv parsing.
     CsvParseError(String),
+    /// Indicates error in opening or reading the csv file.
     FileError(String),
 }
 
