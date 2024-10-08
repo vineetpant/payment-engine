@@ -120,18 +120,18 @@ impl PaymentEngine {
         }
     }
 
-/// This asynchronous function prints the state of each client in a CSV format, including the
-/// available funds, held funds, total balance, and account lock status.
-/// 
-/// The function outputs the state of each client as follows:
-///
-/// ```text
-/// client,available,held,total,locked
-/// 1,100.0000,0.0000,100.0000,false
-/// 2,200.0000,0.0000,200.0000,false
-/// ```
-///
-/// The available, held, and total values are displayed with four decimal places.
+    /// This asynchronous function prints the state of each client in a CSV format, including the
+    /// available funds, held funds, total balance, and account lock status.
+    ///
+    /// The function outputs the state of each client as follows:
+    ///
+    /// ```text
+    /// client,available,held,total,locked
+    /// 1,100.0000,0.0000,100.0000,false
+    /// 2,200.0000,0.0000,200.0000,false
+    /// ```
+    ///
+    /// The available, held, and total values are displayed with four decimal places.
     pub async fn output_client_states(&self) {
         println!("client,available,held,total,locked");
         for (client_id, client) in &self.clients {
