@@ -43,7 +43,7 @@ impl PaymentEngine {
     fn process_deposit(&mut self, txn: Transaction) {
         let client = self.clients.entry(txn.client).or_insert(Client::new());
 
-        if !client.locked {
+        if !client.locked {// don't process if account is locked
             if let Some(amount) = txn.amount {
                 client.available += amount;
                 client.total += amount;
@@ -55,7 +55,7 @@ impl PaymentEngine {
     fn process_withdrawal(&mut self, txn: Transaction) {
         let client = self.clients.get_mut(&txn.client);
         if let Some(client) = client {
-            if !client.locked {
+            if !client.locked { // don't process if account is locked
                 if let Some(amount) = txn.amount {
                     if client.available >= amount {
                         client.available -= amount;
@@ -70,7 +70,7 @@ impl PaymentEngine {
 
     fn process_dispute(&mut self, txn: Transaction) {
         if let Some(original_txn) = self.transactions.get(&txn.tx) {
-            if original_txn.client == txn.client {
+            if original_txn.client == txn.client { // both transaction should refer to same client
                 let client = self.clients.get_mut(&original_txn.client);
                 if let Some(client) = client {
                     if let Some(amount) = original_txn.amount {
@@ -84,9 +84,9 @@ impl PaymentEngine {
     }
 
     fn process_resolve(&mut self, txn: Transaction) {
-        if self.disputed_transactions.contains_key(&txn.tx) {
+        if self.disputed_transactions.contains_key(&txn.tx) { // resolve only if disputed transaction reference is present
             if let Some(original_txn) = self.transactions.get(&txn.tx) {
-                if original_txn.client == txn.client {
+                if original_txn.client == txn.client { // both transaction should refer to same client
                     let client = self.clients.get_mut(&original_txn.client);
                     if let Some(client) = client {
                         if let Some(amount) = original_txn.amount {
@@ -100,9 +100,9 @@ impl PaymentEngine {
     }
 
     fn process_chargeback(&mut self, txn: Transaction) {
-        if self.disputed_transactions.contains_key(&txn.tx) {
+        if self.disputed_transactions.contains_key(&txn.tx) { // chargeback only if disputed transaction reference is present
             if let Some(original_txn) = self.transactions.get(&txn.tx) {
-                if original_txn.client == txn.client {
+                if original_txn.client == txn.client { // both transaction should refer to same client
                     let client = self.clients.get_mut(&original_txn.client);
                     if let Some(client) = client {
                         if let Some(amount) = original_txn.amount {
