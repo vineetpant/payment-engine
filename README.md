@@ -6,6 +6,7 @@ A simple payments engine written in Rust that processes a series of transactions
 ## Important Notes
 - Streamed CSV Processing: Instead of loading the entire CSV file into memory, transactions are processed as they are read, making it efficient for large datasets.
 - Asynchronous processing: Asynchronously parses and processes a given transaction and updates the client’s account state.
+- Unit tests: Unit tests are written for `parser` and `payment_engine` to ensure correct handling of transaction data. 
 - Dispute Handling: Automatically moves disputed funds into a held state and updates the client account state.
 - Chargeback Support: Handles chargebacks and locks client accounts when a chargeback occurs.
 - Concurrency-Ready: Built with asynchronous functions using tokio for potential future scalability in handling multiple concurrent requests.
@@ -17,6 +18,7 @@ You should be able to run your payments engine like
 ```sh
 $ cargo run -- transactions.csv > accounts.csv
 ```
+Sample `transactions.csv` file use to test the command line processing is include in this repository.
 
 ## Run the tests
 You can run simple cargo tests 
