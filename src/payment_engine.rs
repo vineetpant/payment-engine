@@ -167,7 +167,7 @@ mod tests {
         if let Some(client) = engine.clients.get(&1) {
             assert_eq!(client.total, 1.5);
             assert_eq!(client.available, 1.5);
-            assert_eq!(client.locked, false);
+            assert!(!client.locked);
             assert_eq!(client.held, 0.0);
         }
 
@@ -197,7 +197,7 @@ mod tests {
         if let Some(client) = engine.clients.get(&2) {
             assert_eq!(client.total, 0.0);
             assert_eq!(client.available, 0.0);
-            assert_eq!(client.locked, true); // should be locked due to chargeback
+            assert!(client.locked); // should be locked due to chargeback
             assert_eq!(client.held, 0.0);
         }
 
@@ -225,7 +225,7 @@ mod tests {
         if let Some(client) = engine.clients.get(&2) {
             assert_eq!(client.total, 2.0);
             assert_eq!(client.available, 0.0); // available should be 0 due to dispute
-            assert_eq!(client.locked, false);
+            assert!(!client.locked);
             assert_eq!(client.held, 2.0);
         }
 
@@ -254,7 +254,7 @@ mod tests {
         if let Some(client) = engine.clients.get(&2) {
             assert_eq!(client.total, 2.0);
             assert_eq!(client.available, 2.0);
-            assert_eq!(client.locked, false);
+            assert!(!client.locked);
             assert_eq!(client.held, 0.0); // held should be 0 as dispute is resolved
         }
 
