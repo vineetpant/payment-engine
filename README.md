@@ -3,6 +3,9 @@
 ## About
 A simple payments engine written in Rust that processes a series of transactions from a CSV, updates client accounts, handles disputes, chargebacks, and outputs the final state of clients' accounts. This project is designed to handle large datasets efficiently by streaming CSV transactions instead of loading the entire dataset into memory at once.
 
+## Assumptions
+- If account is locked/frozen `deposit` and `withdraw` transactions will not be processed. 
+
 ## Important Notes
 - Streamed CSV Processing: Instead of loading the entire CSV file into memory, transactions are processed as they are read, making it efficient for large datasets.
 - Asynchronous processing: Asynchronously parses and processes a given transaction and updates the client’s account state.
@@ -21,7 +24,7 @@ $ cargo run -- transactions.csv > accounts.csv
 Sample `transactions.csv` file use to test the command line processing is include in this repository.
 
 ## Run the tests
-You can run simple cargo tests 
+You can run cargo tests 
 
 ```sh
 cargo test
