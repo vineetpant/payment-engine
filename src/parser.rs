@@ -17,8 +17,6 @@ use std::io::Read;
 ///
 /// Returns a `Result` containing:
 /// - On success: A boxed iterator (`Box<dyn Iterator<Item = Result<Transaction, PaymentError>>>`)
-///  that yields parsed transactions or errors as it iterates over the input without
-///  needing to load all data into memory upfront.
 /// - On failure: A `PaymentError` detailing the cause of the failure.
 pub async fn parse_transactions(
     br: Box<dyn Read>,
