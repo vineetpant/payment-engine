@@ -15,6 +15,9 @@ A simple payments engine written in Rust that processes a series of transactions
 - Concurrency-Ready: Built with asynchronous functions using tokio for potential future scalability in handling multiple concurrent requests.
 - Custom Error Handling: Provides detailed error types for CSV parsing, invalid transactions, and more
 
+## Workflow
+Github workflow is added to test project compilation , run unit tests and check for potential code smells using clippy.
+
 ## Run the project
 You should be able to run your payments engine like
 
